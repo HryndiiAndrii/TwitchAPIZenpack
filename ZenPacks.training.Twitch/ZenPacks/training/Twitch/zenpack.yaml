@@ -1,0 +1,50 @@
+name: ZenPacks.training.Twitch
+
+zProperties:
+  DEFAULTS:
+    category: Twitch API
+
+  zTwitchChannels:
+    type: lines
+    default:
+      - nyc_timescape
+      - imoutonyan
+
+  zAuthorizationToken:
+    type: string
+    default: 1lqe2jgdti8jbk0iunzivyvdgzbca7
+
+  zClientID:
+    type: string
+    default: 50vngdkhl7a1e7hndy4jde5vn86jil
+
+classes:
+  TwitchDevice:
+    base: [zenpacklib.Device]
+    label: Twitch API
+
+  TwitchChannel:
+    base: [zenpacklib.Component]
+    label: Channel
+
+    properties:
+      language:
+        label: Language
+
+      user_name:
+        label: User Name
+
+      thumbnail_url:
+        label: Thumbnail
+
+class_relationships:
+  - TwitchDevice 1:MC TwitchChannel
+
+device_classes:
+  /Twitch:
+    zProperties:
+      zPythonClass: ZenPacks.training.Twitch.TwitchDevice
+      zPingMonitorIgnore: true
+      zSnmpMonitorIgnore: true
+      zCollectorPlugins:
+        - Twitch.Channels
